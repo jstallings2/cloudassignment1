@@ -1,4 +1,5 @@
 # CS 4287-01 Assignment 1
+## Jacob Stallings & Quinton Chudik
 ### How to run:
 For the following, the names of the VM's are `jacob-quinnVM#` where # is the number of the VM (2 or 3)
 
