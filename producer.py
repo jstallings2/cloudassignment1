@@ -24,7 +24,7 @@ from kafka import KafkaProducer  # producer of events
 
 # acquire the producer
 # (you will need to change this to your bootstrap server's IP addr)
-producer = KafkaProducer (bootstrap_servers="129.114.27.100:9092", 
+producer = KafkaProducer (bootstrap_servers="129.114.25.52:9092", 
                                           acks=1)  # wait for leader to write to log
 
 # say we send the contents 100 times after a sleep of 1 sec in between
@@ -47,9 +47,7 @@ for i in range (100):
     d = {'timestamp': time.time(),
         'contents of top': contents
             }
-    producer.send ("utilizations", value=json.dumps(d))
-    # if doesn't work, try replacing the param with this:
-    # value=bytes(json.dumps(d), 'ascii')
+    producer.send ("utilizationX", value=bytes(json.dumps(d), 'ascii') )
     # i.e. convert the json to raw bytes before sending
     producer.flush ()   # try to empty the sending buffer
 
