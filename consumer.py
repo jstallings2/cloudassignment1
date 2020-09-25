@@ -15,10 +15,10 @@ import os   # need this for popen
 import time # for sleep
 import json
 from kafka import KafkaConsumer  # consumer of events
-import couchdb
+import pycouchdb
 
 # Set up server/db
-couch = couchdb.Server()
+couch = pycouchdb.Server('http://admin:password1@localhost:5984')
 
 db = couch.create('assignment1')
 
@@ -27,10 +27,10 @@ db = couch.create('assignment1')
 
 # acquire the consumer
 # (you will need to change this to your bootstrap server's IP addr)
-consumer = KafkaConsumer (bootstrap_servers="192.168.15.3:9092")
+consumer = KafkaConsumer (bootstrap_servers="129.114.25.52:9092")
 
 # subscribe to topic
-consumer.subscribe (topics=["utilizations"])
+consumer.subscribe (topics=["utilization1", "utilization2"])
 
 # we keep reading and printing
 for msg in consumer:
@@ -42,13 +42,10 @@ for msg in consumer:
     #
     # convert the value field into string (ASCII)
 
-    # message = str(msg.value, 'ascii')
+    message = str(msg.value, 'ascii')
 
-    # message is now a json serialized representation
-    # go from json to database
-
-    # json to python dict
-    doc = json.loads(msg)
+    # deserialize
+    doc = json.loads(message)
 
     # dump doc into db
     db.save(doc)
