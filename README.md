@@ -11,4 +11,4 @@ For the following, the names of the VM's are `jacob-quinnVM#` where # is the num
 7. Start up the producers on VM1.1 and VM1.2 (the local VirtualBox VM's). `python3 producer.py`  
 8. Open another ssh connection to VM3 and run the consumer code. `python3 consumer.py`  
 9. To verify that the data was successfully dumped to the database, run the following command from VM3 shell: `curl -X GET http://admin:password1@localhost:5984/assignment1/_all_docs`. Append the optional parameter `?include_docs=true` to see the actual contents of the docs (the output of `top`).  
-10. Once done, it is necessary to clear the Kafka logs using the command: 
+10. Once done, it is necessary to clear the Kafka logs using the command: `rm -fr /tmp/zookeeper* /tmp/kafka*`
